@@ -1,31 +1,36 @@
 package com.example;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Horse extends Thread {
     private Track track = new Track(100);
-    public static int nextHorseId = 1; 
+    public static AtomicInteger nextHorseId = new AtomicInteger(1);
     public int horseId;
     private int position = 0;
     private boolean hasFinished = false;
     private int speed = (int) (Math.random() * 10) + 1;
 
     public Horse() {
-        this.horseId = nextHorseId++;  
+        this.horseId = nextHorseId.getAndIncrement(); 
     }
 
+    @Override
     public void run() {
         race();
     }
 
     private void race() {
         while (!hasFinished) {
-            System.out.println("Il cavallo " + horseId + " sta avanzando");
             position += speed;
             if (position >= track.length) {
                 hasFinished = true;
                 System.out.println("Il cavallo " + horseId + " ha finito la gara!");
             }
+            else {
+                System.out.println("Il cavallo " + horseId + " sta avanzando");
+            }
             try {
-                Thread.sleep(500);
+                Thread.sleep(1); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -42,5 +47,9 @@ public class Horse extends Thread {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public int getHorseId() {
+        return horseId;
     }
 }
