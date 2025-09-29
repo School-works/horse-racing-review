@@ -24,5 +24,6 @@ public class Main {
         for (Horse horse : horses) {
             System.out.println("Cavallo " + horse.getHorseId()+ " - Posizione finale: " + horse.getRanking() +"˚ - Velocità: " + horse.getSpeed());
         }
+        System.out.println("UwU");
     }
 }
