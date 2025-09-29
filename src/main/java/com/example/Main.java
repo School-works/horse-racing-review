@@ -22,7 +22,7 @@ public class Main {
 
         System.out.println("-------------------------\nRisultati della gara:");
         for (Horse horse : horses) {
-            System.out.println("Cavallo " + horse.getHorseId()  +" - Velocità: " + horse.getSpeed());
+            System.out.println("Cavallo " + horse.getHorseId()+ " - Posizione finale: " + horse.getRanking() +"˚ - Velocità: " + horse.getSpeed());
         }
     }
 }

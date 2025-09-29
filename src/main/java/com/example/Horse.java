@@ -5,6 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Horse extends Thread {
     private Track track = new Track(100);
     public static AtomicInteger nextHorseId = new AtomicInteger(1);
+    public static AtomicInteger rankings = new AtomicInteger(0);
+    public int finalHorseRank;
     public int horseId;
     private int position = 0;
     private boolean hasFinished = false;
@@ -12,9 +14,10 @@ public class Horse extends Thread {
 
     public Horse() {
         this.horseId = nextHorseId.getAndIncrement(); 
+        this.finalHorseRank = 0;
+
     }
 
-    @Override
     public void run() {
         race();
     }
@@ -25,6 +28,7 @@ public class Horse extends Thread {
             if (position >= track.length) {
                 hasFinished = true;
                 System.out.println("Il cavallo " + horseId + " ha finito la gara!");
+                finalHorseRank = rankings.incrementAndGet();
             }
             else {
                 System.out.println("Il cavallo " + horseId + " sta avanzando");
@@ -51,5 +55,9 @@ public class Horse extends Thread {
 
     public int getHorseId() {
         return horseId;
+    }
+
+    public int getRanking() {
+        return finalHorseRank;
     }
 }
